@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
 import { newColors as Colors } from "../../constants/colors";
-import type { TextProps } from "./types";
+import type { TextProps } from "../../types";
 
 export const BigText: React.FC<TextProps> = (props) => {
   return (
@@ -16,8 +16,6 @@ export const BigText: React.FC<TextProps> = (props) => {
     </Text>
   );
 };
-
-// export default BigText;
 
 const styles = StyleSheet.create({
   testStyle: { fontSize: 20, color: "black", textAlign: "left" },

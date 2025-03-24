@@ -2,22 +2,20 @@ import { StyleSheet, View, TouchableOpacity } from "react-native";
 import React from "react";
 import {SmallText} from "../Texts/SmallText";
 import { newColors as Colors } from "../../constants/colors";
-
-type Theme = "light"|"dark"
+import type {themeType} from "../../types";
 
 type ButtonType = {
   label: string;
   onClick: () => void;
-  theme?: Theme;
-};
+  theme?: themeType;
+  style?: {}
+  }
 
 export const Button:React.FC<ButtonType> = ({ label, onClick, theme, ...props }) => {
-
 
   const handlePress = () => {
     onClick();
   };
-
 
   return (
     <View style={styles.container}>
@@ -26,6 +24,7 @@ export const Button:React.FC<ButtonType> = ({ label, onClick, theme, ...props })
           style={[
             styles.buttonStyle,
             theme ? { backgroundColor: Colors[theme].bg_button } : {},
+            props.style
           ]}
           {...props}
         >

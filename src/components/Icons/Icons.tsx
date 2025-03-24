@@ -3,8 +3,7 @@ import type {  JSX, ReactNode} from "react";
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { newColors as Colors } from '../../constants/colors';
 import { FontAwesome } from '@expo/vector-icons';
-
-type themeType = 'light' | 'dark';
+import type {themeType} from "../../types";
 
 export type rightIconType = {
   handlePassword: () => void;

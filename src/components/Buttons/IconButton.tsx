@@ -1,16 +1,14 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import React from "react";
 import { newColors as Colors } from "../../constants/colors";
-
 import { Icon } from "../Icons/Icons";
 import { FontAwesome } from "@expo/vector-icons";
-
-type ThmeType = "light" | "dark";
+import type {themeType} from "../../types";
 
 type ButtonType = {
   label: keyof typeof icons;
   onClick: (label: keyof typeof icons) => void;
-  theme?: ThmeType;
+  theme?: themeType;
 };
 
 const icons = {
