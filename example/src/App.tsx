@@ -23,6 +23,10 @@ const DATA = [
 export default function App() {
   const theme: themeType = 'light' as themeType;
 
+  const handleClick= (action:string,id:string):void=>{
+    console.log('##### hanleClick #########',action,id)
+  }
+
   return (
     <View
       style={[styles.container, theme === 'light' ? styles.dark : styles.light]}
@@ -31,14 +35,14 @@ export default function App() {
       <BigText theme={theme}>Dies ist ein Bigtext mit theme {theme}</BigText>
       <Button theme={theme} label="Click" onClick={() => {}} />
       <IconButton theme={theme} label="delete" onClick={() => {}} /> */}
-      <Flatlist theme={theme} data={DATA} width={300}/>
+      <Flatlist theme={theme} data={DATA} onClick={handleClick} width={100}/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: .2,
+    flex: 1,
   },
   light: {
     backgroundColor: 'rgb(203,203,203)',

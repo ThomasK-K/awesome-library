@@ -25,6 +25,7 @@ type FlatlistProps = {
   width: number;
   theme: "light" | "dark";
   data: {id:string,title:string}[]
+  onClick:(action:string,id:string) => void
   props?: any;
 };
 const Item = ({ title, style }: ItemProps) => (
@@ -33,12 +34,13 @@ const Item = ({ title, style }: ItemProps) => (
   </View>
 );
 //##################################################
-export const MyFlatlist = ({ width, theme,data, ...props }: FlatlistProps) => {
+export const MyFlatlist = ({ width, theme,data,onClick, ...props }: FlatlistProps) => {
   const handleBlur = () => {
     console.log("handleBlur");
   };
   const handleClick = (iconName:string,id:string) => {
-    console.log("handleClick", iconName,id);
+    onClick(iconName,id)
+
   };
   const {}={...props}
   const strArray = data??DATA
