@@ -7,7 +7,7 @@ export const colors = {
 };
 
 const lightblue ="rgb(229, 240, 249)";
-const lightblue1 ="rgb(178, 206, 230)";
+const lightblue1 ="rgb(229, 240,225)";
 const mediumblue = "rgb(0, 106, 199)";
 const darkblue = "rgb(5, 35, 90)";
 const yellow = "rgb(243, 249, 0)";

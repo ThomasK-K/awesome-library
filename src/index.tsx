@@ -21,3 +21,6 @@ export {MyFlatlist as Flatlist} from "./components/Flatlist"
 export {ModalComponent as Modal} from "./components/Modal"
 // Switch
 export {MySwitch as Switch} from "./components/Switch"
+// Inputs
+export {InputSelect} from "./components/Inputs/InputSelect"
+export {MyTextInput as Input} from "./components/Inputs/Input"

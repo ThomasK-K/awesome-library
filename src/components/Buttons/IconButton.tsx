@@ -1,4 +1,4 @@
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Pressable } from "react-native";
 import React from "react";
 import { newColors as Colors } from "../../constants/colors";
 import { Icon } from "../Icons/Icons";
@@ -9,6 +9,7 @@ type ButtonType = {
   label: keyof typeof icons;
   onClick: (label: keyof typeof icons) => void;
   theme?: themeType;
+  disabled?:boolean
 };
 
 const icons = {
@@ -20,7 +21,7 @@ default:"eye"
 const getIconName = (label: keyof typeof icons) => icons[label] ? icons[label] : icons.default;
 
 // #################################################
-export const IconButton:React.FC<ButtonType> = ({ label, onClick, theme, ...props }) => {
+export const IconButton:React.FC<ButtonType> = ({ label, disabled=false,onClick, theme, ...props }) => {
   //
   const handlePress = () => {
     onClick(label);
@@ -29,7 +30,7 @@ export const IconButton:React.FC<ButtonType> = ({ label, onClick, theme, ...prop
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => handlePress()}>
+      <Pressable disabled= {disabled} onPress={() => handlePress()}>
         <View
           style={[
             styles.buttonStyle,
@@ -40,12 +41,12 @@ export const IconButton:React.FC<ButtonType> = ({ label, onClick, theme, ...prop
           <Icon theme={theme} style={{ paddingHorizontal: 1 }}>
             <FontAwesome
               name={getIconName(label) as keyof typeof FontAwesome.glyphMap}
-              size={15}
-              color={Colors[theme ? theme : "dark"].icon_color}
+              size={20}
+              color={Colors[theme === "dark"? "light" : "light"].icon_color}
             />
           </Icon>
         </View>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };
@@ -57,8 +58,10 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   buttonStyle: {
+    alignItems:"center",
     borderRadius: 20,
     backgroundColor: "black",
+    padding:10
   },
   textStyle: {
     padding: 10,

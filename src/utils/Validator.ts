@@ -40,7 +40,7 @@ export const handleValidation = (
   value: string,
   validation: { required?: boolean; type?: string } = {}
 ) => {
-  let setErrors = "";
+  let errMessage = "";
   if (validation) {
     if (validation.required) {
       if (!myValidator.isRequired(value)) {
@@ -49,28 +49,28 @@ export const handleValidation = (
     }
     switch (validation.type) {
       case "email":
-        if (!myValidator.isEmail(value)) setErrors = "Field is not an Email";
+        if (!myValidator.isEmail(value)) errMessage = "Field is not an Email";
         break;
       case "password":
         if (!myValidator.isStrongPassword(value))
-          setErrors = "Password does  not an match";
+          errMessage = "Password does  not an match";
         break;
       case "phone":
         if (!myValidator.isPhone(value))
-          setErrors = "entry is not a phone number";
+          errMessage = "entry is not a phone number";
         break;
       case "url":
-        if (!myValidator.isURL(value)) setErrors = "entry is not a Url";
+        if (!myValidator.isURL(value)) errMessage = "entry is not a Url";
         break;
       case "ipAdress":
-        if (!myValidator.isURL(value)) setErrors = "entry is not a Url";
+        if (!myValidator.isURL(value)) errMessage = "entry is not a Url";
         break;
       case "numeric":
-        if (!myValidator.isNumeric(value)) setErrors = "entry is not a number";
+        if (!myValidator.isNumeric(value)) errMessage = "entry is not a number";
         break;
       default:
         break;
     }
   }
-  return setErrors;
+  return errMessage;
 };
