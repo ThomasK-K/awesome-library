@@ -25,10 +25,8 @@ export const MyTextInput: React.FC<textInputType> = ({
     Colors[theme ? theme : 'dark'].bg_input
   );
   const [hidePassword, setHidePassword] = useState(true);
-  const [hasFocus, sethasFocus] = useState<boolean>(false);
   // const [placeh,setPlaceh] = useState<string | null>(null);
   const [value, setvalue] = useState('');
-  const [onPress,setOnPress] = useState(false);
   const [errors, setFieldError] = useState('');
   const setError = useSetRecoilState(errorState);
   const errorRecoil = useRecoilState(errorState);
@@ -43,14 +41,9 @@ export const MyTextInput: React.FC<textInputType> = ({
     setInputBackgroundColor(
       theme ? Colors[theme]?.focus_input : Colors.focus_input
     );
-    sethasFocus(true);
-    setOnPress(true);
-    // if (value === '' || null) {
-    //   setPlaceh(' ');
-    // } else {
-    //   setPlaceh(label || null);
-    // }
-
+    // sethasFocus(true);
+    // setOnPress(true);
+  
   };
   //////////////////////////////////////////////////////
   const handleChange = (fieldname: string, fieldvalue: string) => {
@@ -71,7 +64,7 @@ export const MyTextInput: React.FC<textInputType> = ({
     // sethasFocus(false)
     setInputBackgroundColor(theme ? Colors[theme].bg_input : Colors.bg_input);
     if (value === '' || null) {
-      sethasFocus(false);
+      // sethasFocus(false);
       // setPlaceh(' ');
     }
     console.log('##### handle Blur');
@@ -85,7 +78,7 @@ export const MyTextInput: React.FC<textInputType> = ({
        setError(newError)
        
 
-    setOnPress(false);
+    // setOnPress(false);
   };
   return (
     <View>
