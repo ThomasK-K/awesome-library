@@ -7,8 +7,8 @@ import { SmallText } from '../Texts/SmallText';
 import { newColors as Colors } from '../../constants/colors';
 import { type inputSelectProps } from '../../types';
 import { handleValidation } from '../../utils/Validator';
-import { useSetRecoilState } from "recoil";
-import {  errorState} from "../../hooks/useErrorHandling";
+import { useSetRecoilState, useRecoilState } from 'recoil';
+import { errorState, type ErrorStateType } from '../../hooks/useErrorHandling';
 
 export const InputSelect: React.FC<inputSelectProps> = ({
   isDecimal,
@@ -26,27 +26,41 @@ export const InputSelect: React.FC<inputSelectProps> = ({
     Colors[theme ? theme : 'dark'].bg_input
   );
   const [value, setValue] = useState('');
-  const [errors, setErrors] = useState('');
-   const setError = useSetRecoilState(errorState);
+  const [errors, setFieldError] = useState('');
+  const setError = useSetRecoilState(errorState);
+  const errorRecoil = useRecoilState(errorState);
 
   const customOnFocus = () => {
     setInputBackgroundColor(Colors[theme ? theme : 'dark'].focus_input);
     // setErrors(handleValidation(value, validation));
-    const errMessage = handleValidation(value, validation);
-    setErrors(errMessage);
-    setError({
-      message: errMessage || '',
-      type: 'validation',
-    });
+    console.log('##### handle Focus');
+    setFieldError('');
   };
 
   const customOnBlur = () => {
     setInputBackgroundColor(Colors[theme ? theme : 'dark'].bg_input);
+    console.log('##### handle Blur');
+    const errMessage = handleValidation(value, validation);
+    setFieldError(errMessage);
+    const newError: ErrorStateType = {
+      ...(errorRecoil[0] as ErrorStateType),
+      [name]: errMessage,
+      type: 'validation',
+    };
+    setError(newError);
   };
   const handleSelect = (fieldname: string, fieldvalue: string) => {
     setValue(fieldvalue);
     onValueChange(fieldname, fieldvalue);
-    // console.log("##### handleChange", fieldvalue);
+    console.log('##### handleChange', fieldvalue);
+    const errMessage = handleValidation(fieldvalue, validation);
+    setFieldError(errMessage);
+    const newError: ErrorStateType = {
+      ...(errorRecoil[0] as ErrorStateType),
+      [name]: errMessage,
+      type: 'validation',
+    };
+    setError(newError);
   };
 
   return (

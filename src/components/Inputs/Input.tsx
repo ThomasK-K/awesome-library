@@ -1,74 +1,90 @@
-import React, { type JSX, useState } from "react";
-import { StyleSheet, View, TextInput, Pressable, Platform } from "react-native";
-import { useSetRecoilState } from "recoil";
-import {  errorState} from "../../hooks/useErrorHandling";
-import { FontAwesome} from "@expo/vector-icons";
-import {SmallText} from "../Texts/SmallText";
-import { newColors as Colors } from "../../constants/colors";
-import { handleValidation } from "../../utils/Validator";
-import { type textInputType } from "../../types";
-import { LeftIcon, RightIcon } from "../Icons/Icons";
+import React, { type JSX, useState, useEffect } from 'react';
+import { StyleSheet, View, TextInput, Pressable, Platform } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
+import { SmallText } from '../Texts/SmallText';
+import { newColors as Colors } from '../../constants/colors';
+import { handleValidation } from '../../utils/Validator';
+import { type textInputType } from '../../types';
+import { LeftIcon, RightIcon } from '../Icons/Icons';
+import { useSetRecoilState, useRecoilState } from 'recoil';
+import { errorState, type ErrorStateType } from '../../hooks/useErrorHandling';
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-export const MyTextInput:React.FC<textInputType> = ({
+export const MyTextInput: React.FC<textInputType> = ({
   name,
   label,
   iconName,
   isPassword,
   isDecimal,
   onValueChange,
-  width=200,
+  width = 200,
   validation,
   theme,
   ...props
 }): JSX.Element => {
   const [inputBackgroundColor, setInputBackgroundColor] = useState(
-    Colors[theme?theme:"dark"].bg_input
+    Colors[theme ? theme : 'dark'].bg_input
   );
   const [hidePassword, setHidePassword] = useState(true);
-  const [_, sethasFocus] = useState<boolean>(false);
-  const [placeh, setPlaceh] = useState<string | null>(null);
-  const [value, setvalue] = useState("");
-  const [onPress, setOnPress] = useState(false);
-  const [errors, setErrors] = useState("");
+  const [hasFocus, sethasFocus] = useState<boolean>(false);
+  // const [placeh,setPlaceh] = useState<string | null>(null);
+  const [value, setvalue] = useState('');
+  const [onPress,setOnPress] = useState(false);
+  const [errors, setFieldError] = useState('');
   const setError = useSetRecoilState(errorState);
+  const errorRecoil = useRecoilState(errorState);
 
-// dummy
-  const {}={...props}
+  // dummy
+  const {} = { ...props };
+
+  useEffect(() => {}, [errors]);
 
   const handlePress = () => {
-    setErrors("");
+    setFieldError('');
     setInputBackgroundColor(
       theme ? Colors[theme]?.focus_input : Colors.focus_input
     );
     sethasFocus(true);
     setOnPress(true);
-    if (value === "" || null) {
-      setPlaceh(" ");
-    } else {
-      setPlaceh(label || null);
-    }
-    console.log("#  handlePress ####", placeh, onPress);
+    // if (value === '' || null) {
+    //   setPlaceh(' ');
+    // } else {
+    //   setPlaceh(label || null);
+    // }
+
   };
   //////////////////////////////////////////////////////
   const handleChange = (fieldname: string, fieldvalue: string) => {
-    if (fieldvalue === "") setPlaceh("...");
+ 
     onValueChange(fieldname, fieldvalue);
     setvalue(fieldvalue);
+    const errMessage = handleValidation(value, validation);
+    setFieldError(errMessage)
+    const newError: ErrorStateType = {
+      ...(errorRecoil[0] as ErrorStateType),
+      [name]: errMessage,
+      type: 'validation',
+    };
+    setError(newError);
   };
   ////////////////////////////////////////////////////////
   const handleBlur = () => {
     // sethasFocus(false)
     setInputBackgroundColor(theme ? Colors[theme].bg_input : Colors.bg_input);
-    if (value === "" || null) {
+    if (value === '' || null) {
       sethasFocus(false);
-      setPlaceh(" ");
+      // setPlaceh(' ');
     }
-    const errMessage = handleValidation(value, validation)
-    setErrors(errMessage)
-    setError({
-      message: errMessage||'',
-      type: "validation"
-    });
+    console.log('##### handle Blur');
+    const errMessage = handleValidation(value, validation);
+    setFieldError(errMessage)
+      const newError: ErrorStateType = {
+         ...(errorRecoil[0] as ErrorStateType),
+         [name]: errMessage,
+         type: 'validation',
+       };
+       setError(newError)
+       
+
     setOnPress(false);
   };
   return (
@@ -76,8 +92,8 @@ export const MyTextInput:React.FC<textInputType> = ({
       <Pressable
         style={[
           styles.inputField,
-           { backgroundColor: Colors[theme ? theme : "dark"].bg_input },
-          { borderBottomColor: Colors[theme ? theme : "dark"].border_color },
+          { backgroundColor: Colors[theme ? theme : 'dark'].bg_input },
+          { borderBottomColor: Colors[theme ? theme : 'dark'].border_color },
         ]}
         onPressIn={handlePress}
         onBlur={handleBlur}
@@ -87,14 +103,15 @@ export const MyTextInput:React.FC<textInputType> = ({
             <FontAwesome
               name="euro"
               size={30}
-              color={Colors[theme ? theme : "dark"].icon_color}
+              color={Colors[theme ? theme : 'dark'].icon_color}
             />
           ) : (
             <FontAwesome
               // name={icon?icon:"filter"}
-              name={iconName??"filter" }
+              name={iconName ?? 'filter'}
               size={30}
-              color={Colors[theme ? theme : "dark"].icon_color}            />
+              color={Colors[theme ? theme : 'dark'].icon_color}
+            />
           )}
         </LeftIcon>
         <View
@@ -108,12 +125,16 @@ export const MyTextInput:React.FC<textInputType> = ({
         >
           <SmallText theme={theme}>{label}</SmallText>
           <TextInput
-            style={[styles.inputText,{width:width-20},{backgroundColor: inputBackgroundColor}]}
+            style={[
+              styles.inputText,
+              { width: width - 20 },
+              { backgroundColor: inputBackgroundColor },
+            ]}
             // placeholder={placeh ? placeh : props.placeholder}
             value={value}
             onChangeText={(val) => handleChange(name, val)}
             secureTextEntry={isPassword && hidePassword}
-            keyboardType={isDecimal ? "numeric" : "default"}
+            keyboardType={isDecimal ? 'numeric' : 'default'}
             onFocus={handlePress}
             onBlur={handleBlur}
           />
@@ -134,8 +155,8 @@ export const MyTextInput:React.FC<textInputType> = ({
 
 const styles = StyleSheet.create({
   inputField: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     borderBottomWidth: 2,
     borderTopEndRadius: 10,
 
@@ -145,7 +166,7 @@ const styles = StyleSheet.create({
     padding: 1,
   },
   rightIcon: {
-    position: "absolute",
+    position: 'absolute',
     top: 25,
     right: 15,
     zIndex: 1,
@@ -163,18 +184,18 @@ const styles = StyleSheet.create({
       default: 10,
     }),
     borderWidth: 1,
-    alignItems:"center",
+    alignItems: 'center',
     paddingRight: 15,
 
-       // Schatten für iOS
-       shadowColor: '#000',
-       shadowOffset: { width: 5, height: 5 },
-       shadowOpacity: 0.3,
-       shadowRadius: 10,
-       // Schatten für Android
-       elevation: 10,
+    // Schatten für iOS
+    shadowColor: '#000',
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    // Schatten für Android
+    elevation: 10,
   },
   error: {
-    color: "red",
+    color: 'rgb(236, 163, 163)',
   },
 });

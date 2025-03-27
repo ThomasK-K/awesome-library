@@ -1,10 +1,10 @@
 import { StyleSheet, View, Modal, type ModalProps } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from './Buttons/Button';
 import { newColors as Colors } from '../constants/colors';
 import { SmallText } from '../components/Texts/SmallText';
 import { useRecoilValue } from 'recoil';
-import { errorState } from '../hooks/useErrorHandling';
+import { errorState, type ErrorStateType } from '../hooks/useErrorHandling';
 ///////////////////////////////////////////////////
 
 type ModalProp = {
@@ -25,7 +25,18 @@ export const ModalComponent: React.FC<
   animationType = 'slide',
   visible,
 }: { children?: JSX.Element[] } & ModalProp): JSX.Element => {
-  const error = useRecoilValue(errorState);
+  const [disabled, setDisabled] = useState(true);
+  const errorObject: ErrorStateType = useRecoilValue(errorState);
+  useEffect(() => {
+    const  resArr = Object.values(errorObject).filter((val) => {
+      if (!(val === null || val === 'validation')) {
+        return val
+      }
+      return
+    });
+    resArr.length===0?setDisabled(false):setDisabled(true)
+  }, [errorObject]);
+
   return (
     <Modal
       style={[styles.modalContent]}
@@ -52,16 +63,14 @@ export const ModalComponent: React.FC<
         <View style={styles.modalbox}>
           {children}
           {/* Button zum Schließen des Modals */}
+          <SmallText style={{ color: 'red' }}>{` `}</SmallText>
           <View style={styles.buttonSet}>
             <Button
               label={buttonLabel}
-              disabled={error.message?true:false}
+              disabled={disabled}
               onClick={() => onClose('Save')}
             />
             <Button label={'Cancel'} onClick={() => onClose('Cancel')} />
-            <SmallText
-              style={{ color: 'red' }}
-            >{` ${error.message}`}</SmallText>
           </View>
         </View>
       </View>
