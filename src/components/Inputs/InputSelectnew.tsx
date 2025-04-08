@@ -130,7 +130,7 @@ export const CrossPlatformPicker: React.FC<inputSelectProps> = ({
       >
         {label && <RNPicker.Item label={label} value={null} enabled={false} />}
         {items.map((item) => (
-          <RNPicker.Item key={item.value} label={name} value={item.value} />
+          <RNPicker.Item key={item.value} label={item.value.toString()} value={item.value} />
         ))}
       </RNPicker>
       {errors && <SmallText style={[styles.error]}>{errors}</SmallText>}

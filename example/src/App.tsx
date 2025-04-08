@@ -119,6 +119,45 @@ export default function App() {
                   onValueChange={onValueChange}
                   items={yearData}
                 />
+                <CrossPlatformPicker
+                                  style={{ width: 200 }}
+                                  label="Name"
+                                  name="Name"
+                                  placeholder="Beleg für ..."
+                                  theme={theme}
+                                  enabled={true}
+                                  validation={{ required: true }}
+                                  onValueChange={onValueChange}
+                                  items={persondata}
+                                />
+                                <CrossPlatformPicker
+                                  style={{ width: 200 }}
+                                  label="Kategorie"
+                                  name="Kategorie"
+                                  placeholder="Kategorie ..."
+                                  theme={theme}
+                                  enabled={true}
+                                  validation={{ required: true }}
+                                  onValueChange={onValueChange}
+                                  items={catData.map((item) => {
+                                    const key = Object.keys(item)[0] as keyof typeof item;
+                                    return { value: key };
+                                  })}
+                                />
+                                {/* // Subcategories */}
+                                {category && (
+                                  <CrossPlatformPicker
+                                    style={{ width: 200 }}
+                                    label="subKategorie"
+                                    name="subKategorie"
+                                    placeholder="Sub Kategorie ..."
+                                    theme={theme}
+                                    enabled={true}
+                                    validation={{ required: true }}
+                                    onValueChange={onValueChange}
+                                    items={category.map((item) => ({ value: item }))}
+                                  />
+                                )}
                 
               </View>
             </ErfassungsMaske>
