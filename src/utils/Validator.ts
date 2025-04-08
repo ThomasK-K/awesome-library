@@ -1,5 +1,5 @@
 // Input Field Validation
-
+// eslint-disable-next-line no-useless-escape
 const isEmail = (email: string): boolean => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
@@ -9,20 +9,24 @@ const isRequired = (val: string | number): boolean => {
   else return true;
 };
 const isPhone = (phone: string): boolean => {
+  // eslint-disable-next-line no-useless-escape
   const regex = /^\d{10}$/; // Beispiel: 10-stellige Nummer
   return regex.test(phone);
 };
 
 const isURL = (url: string): boolean => {
   const regex =
+    // eslint-disable-next-line no-useless-escape
     /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
   return regex.test(url);
 };
 const isStrongPassword = (password: string): boolean => {
   // Mindestens 8 Zeichen, ein Großbuchstabe, ein Sonderzeichen
+  // eslint-disable-next-line no-useless-escape
   const regex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/;
   return regex.test(password);
 };
+/* eslint-enable no-useless-escape */
 const isNumeric = (value: string): boolean => {
   return !isNaN(parseFloat(value)) && isFinite(Number(value));
 };

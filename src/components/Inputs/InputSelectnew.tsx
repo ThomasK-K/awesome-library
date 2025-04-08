@@ -10,7 +10,7 @@ import { useSetRecoilState, useRecoilState } from 'recoil';
 
 const WebSelect: React.FC<{
   value: string | number | null;
-  onValueChange: (value: string | number) => void;
+  onValueChange: (_value: string | number) => void;
   items: SelectItem[];
   placeholder?: string;
   style?: any;

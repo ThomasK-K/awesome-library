@@ -73,11 +73,15 @@
     "@release-it/conventional-changelog": "^9.0.2",
     "@types/jest": "^29.5.5",
     "@types/react": "^18.2.44",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "commitlint": "^19.6.1",
     "del-cli": "^5.1.0",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-jest": "^28.11.0",
     "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react-native": "^5.0.0",
     "jest": "^29.7.0",
     "prettier": "^3.0.3",
     "react": "18.3.1",
@@ -136,14 +140,17 @@
     ],
     "rules": {
       "react/react-in-jsx-scope": "off",
-      "prettier/prettier": [
+      "react-native/no-inline-styles": 0,
+      "no-useless-escape": ["error"],
+             "prettier/prettier": [
         "error",
         {
           "quoteProps": "consistent",
           "singleQuote": true,
           "tabWidth": 2,
           "trailingComma": "es5",
-          "useTabs": false
+          "useTabs": false,
+          "no-inline-styles": false
         }
       ]
     }
@@ -190,6 +197,8 @@
     "version": "0.48.5"
   },
   "dependencies": {
+    "-": "^0.0.1",
+    "D": "^1.0.0",
     "recoil": "^0.7.7"
   }
 }
