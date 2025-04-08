@@ -44,7 +44,9 @@
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli lib",
     "prepare": "bob build",
-    "release": "release-it"
+    "release": "release-it",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
   },
   "keywords": [
     "react-native",
@@ -201,6 +203,9 @@
   "dependencies": {
     "-": "^0.0.1",
     "D": "^1.0.0",
+    "expo": "^52.0.44",
+    "react": "*",
+    "react-native": "*",
     "recoil": "^0.7.7"
   }
 }

@@ -2,14 +2,18 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "tkk-rn-component-package": ["./src/index"]
+      "tkk-rn-component-package": [
+        "./src/index"
+      ]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "noEmit": true,
@@ -26,9 +30,10 @@
     "strict": true,
     "target": "ESNext",
     "verbatimModuleSyntax": true
-  },"exclude": [
+  },
+  "exclude": [
     "node_modules",
-    "_dummy",
-  
-  ]
+    "_dummy"
+  ],
+  "extends": "expo/tsconfig.base"
 }
