@@ -150,7 +150,8 @@
   },
   "eslintIgnore": [
     "node_modules/",
-    "lib/"
+    "lib/",
+    "_dummy/"
   ],
   "prettier": {
     "quoteProps": "consistent",

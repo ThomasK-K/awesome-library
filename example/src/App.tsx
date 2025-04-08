@@ -7,8 +7,7 @@ import {
   BigText,
   IconButton,
   Button,
-  InputSelect,
-  Input,
+  CrossPlatformPicker,
 } from 'tkk-rn-component-package';
 import { useState } from 'react';
 
@@ -16,10 +15,36 @@ type metaDataType = {
   [fieldName: string]: string | number;
 };
 
+const yearData = [{ value: '2025' }, { value: '2024' }, { value: '2023' }];
+const persondata = [{ value: 'Barbara' }, { value: 'Thomas' }];
+const catData = [
+  { Spenden: ['mildtätige Zwecke', 'Parteien'] },
+  { Kapitalerträge: ['Aktien', 'Festgeld'] },
+  { Werbungskosten: ['Fahrten', 'Fortbildung'] },
+  { Sonderausgaben: ['Altersvorsorge', 'Krankenversicherung'] },
+  { Außergewöhnliche: ['Krankheitskosten', 'Beerdigungskosten'] },
+  {
+    Steuerermäßigungen: [
+      'Handwerkerleistungen',
+      'Haushaltsnahe Dienstleistungen',
+    ],
+  },
+  { Steuervergünstigungen: ['Spenden', 'Vorsorgeaufwendungen'] },
+  {
+    'Vermietung und Verpachtung': [
+      'schuldzinsen',
+      'voll abzuziehende Erhaltungsaufwendungen',
+      'Umgelegte Kosten, zb. Grundsteuer',
+      'nicht umgelegte Kosten z.B. Verwaltung',
+    ],
+  },
+];
+
 export default function App() {
   const theme: themeType = 'light' as themeType;
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [fieldData, setFieldData] = useState<metaDataType>({});
+  const [category, setcategory] = useState<string[]>([]);
 
   const handleClick = (): void => {
     setIsModalVisible(true);
@@ -35,6 +60,18 @@ export default function App() {
   //  store filed/value pair
   const onValueChange = (field: string, val: string) => {
     setFieldData({ ...fieldData, [field]: val });
+    if (field === 'Kategorie') {
+      //   val = Spenden
+      catData.map((item) => {
+        const key = Object.keys(item)[0] as keyof typeof item;
+        if (key === val) {
+          setcategory(item[key] ?? []);
+        }
+      });
+
+      // key &&  setcategory(item[key as keyof typeof item])
+      // setcategory(item[key as keyof typeof item];)
+    }
   };
 
   return (
@@ -71,31 +108,56 @@ export default function App() {
               {/* ######### Felder ################## */}
               <BigText theme={theme}>Rechnung erfassen</BigText>
               <View>
-                <InputSelect
+                <CrossPlatformPicker
+                  style={{ width: 200 }}
                   label="Jahr"
                   name="Jahr"
+                  placeholder="select year"
                   theme={theme}
+                  enabled={true}
                   validation={{ required: true }}
                   onValueChange={onValueChange}
-                  valueList={['', '2025', '2024', '2023']}
+                  items={yearData}
                 />
-                <InputSelect
-                  label="Art"
-                  name="Art"
-                  iconName="radio"
-                  validation={{ required: true }}
+                <CrossPlatformPicker
+                  style={{ width: 200 }}
+                  label="Name"
+                  name="Name"
+                  placeholder="Beleg für ..."
                   theme={theme}
-                  onValueChange={onValueChange}
-                  valueList={['', 'Grundsteuer', 'Strom', 'Gas']}
-                />
-                <Input
-                  label="Betrag"
-                  theme={theme}
-                  isDecimal={false}
+                  enabled={true}
                   validation={{ required: true }}
-                  name="Betrag"
                   onValueChange={onValueChange}
+                  items={persondata}
                 />
+                <CrossPlatformPicker
+                  style={{ width: 200 }}
+                  label="Kategorie"
+                  name="Kategorie"
+                  placeholder="Kategorie ..."
+                  theme={theme}
+                  enabled={true}
+                  validation={{ required: true }}
+                  onValueChange={onValueChange}
+                  items={catData.map((item) => {
+                    const key = Object.keys(item)[0] as keyof typeof item;
+                    return { value: key };
+                  })}
+                />
+                {/* // Subcategories */}
+                {category && (
+                  <CrossPlatformPicker
+                    style={{ width: 200 }}
+                    label="subKategorie"
+                    name="subKategorie"
+                    placeholder="Sub Kategorie ..."
+                    theme={theme}
+                    enabled={true}
+                    validation={{ required: true }}
+                    onValueChange={onValueChange}
+                    items={category.map((item) => ({ value: item }))}
+                  />
+                )}
               </View>
             </ErfassungsMaske>
           )}

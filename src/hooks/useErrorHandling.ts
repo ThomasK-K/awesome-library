@@ -9,7 +9,7 @@ export type ErrorStateType = {
 export const errorState = atom<ErrorStateType>({
   key: 'errorState',
   default: {
-    ["message"]: null, // Initial kein Fehler
+    ['message']: null, // Initial kein Fehler
     type: 'validation', // Default-Typ
   },
 });

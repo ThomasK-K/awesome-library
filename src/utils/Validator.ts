@@ -5,7 +5,7 @@ const isEmail = (email: string): boolean => {
   return regex.test(email);
 };
 const isRequired = (val: string | number): boolean => {
-  if (val === "") return false;
+  if (val === '') return false;
   else return true;
 };
 const isPhone = (phone: string): boolean => {
@@ -15,7 +15,7 @@ const isPhone = (phone: string): boolean => {
 
 const isURL = (url: string): boolean => {
   const regex =
-  /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+    /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
   return regex.test(url);
 };
 const isStrongPassword = (password: string): boolean => {
@@ -40,33 +40,33 @@ export const handleValidation = (
   value: string,
   validation: { required?: boolean; type?: string } = {}
 ) => {
-  let errMessage = "";
+  let errMessage = '';
   if (validation) {
     if (validation.required) {
       if (!myValidator.isRequired(value)) {
-        return "Field is required";
+        return 'Field is required';
       }
     }
     switch (validation.type) {
-      case "email":
-        if (!myValidator.isEmail(value)) errMessage = "Field is not an Email";
+      case 'email':
+        if (!myValidator.isEmail(value)) errMessage = 'Field is not an Email';
         break;
-      case "password":
+      case 'password':
         if (!myValidator.isStrongPassword(value))
-          errMessage = "Password does  not an match";
+          errMessage = 'Password does  not an match';
         break;
-      case "phone":
+      case 'phone':
         if (!myValidator.isPhone(value))
-          errMessage = "entry is not a phone number";
+          errMessage = 'entry is not a phone number';
         break;
-      case "url":
-        if (!myValidator.isURL(value)) errMessage = "entry is not a Url";
+      case 'url':
+        if (!myValidator.isURL(value)) errMessage = 'entry is not a Url';
         break;
-      case "ipAdress":
-        if (!myValidator.isURL(value)) errMessage = "entry is not a Url";
+      case 'ipAdress':
+        if (!myValidator.isURL(value)) errMessage = 'entry is not a Url';
         break;
-      case "numeric":
-        if (!myValidator.isNumeric(value)) errMessage = "entry is not a number";
+      case 'numeric':
+        if (!myValidator.isNumeric(value)) errMessage = 'entry is not a number';
         break;
       default:
         break;

@@ -28,13 +28,13 @@ export const ModalComponent: React.FC<
   const [disabled, setDisabled] = useState(true);
   const errorObject: ErrorStateType = useRecoilValue(errorState);
   useEffect(() => {
-    const  resArr = Object.values(errorObject).filter((val) => {
+    const resArr = Object.values(errorObject).filter((val) => {
       if (!(val === null || val === 'validation')) {
-        return val
+        return val;
       }
-      return
+      return;
     });
-    resArr.length===0?setDisabled(false):setDisabled(true)
+    resArr.length === 0 ? setDisabled(false) : setDisabled(true);
   }, [errorObject]);
 
   return (
@@ -48,18 +48,11 @@ export const ModalComponent: React.FC<
     >
       <View
         style={[
-          styles.modalContainer,
           { backgroundColor: Colors[theme ? theme : 'dark'].background95 },
           { boxShadow: Colors[theme ? theme : 'dark'].borderShadow },
-          { width: 500 },
+          { width: '100%' },
         ]}
       >
-        {/* <View
-            style={[
-              styles.modalContent,
-              { backgroundColor: Colors[theme ? theme : "dark"].background40 },
-            ]}
-          > */}
         <View style={styles.modalbox}>
           {children}
           {/* Button zum Schließen des Modals */}
@@ -80,24 +73,9 @@ export const ModalComponent: React.FC<
 
 // Stile
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  modalContainer: {
-    marginTop: 100,
-    // borderWidth: 1,
-    // borderColor: "black",
-    borderRadius: 10,
-    alignSelf: 'center',
-    verticalAlign: 'auto',
-    width: '30%',
-    height: '50%',
-    alignItems: 'center',
-    //Schatten für iOS
-    shadowColor: '#000',
-    shadowOffset: { width: 5, height: 5 },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    // Schatten für Android
-    elevation: 10,
+  modalContent: {
+    flex: 1,
+    width: '50%',
   },
   modalbox: {
     justifyContent: 'center',
@@ -112,12 +90,6 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     // Schatten für Android
     elevation: 10,
-  },
-  modalContent: {
-    margin: 10,
-    padding: 20,
-    borderRadius: 10,
-    alignItems: 'center',
   },
   modalText: {
     fontSize: 18,

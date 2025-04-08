@@ -8,7 +8,7 @@ export const SmallText: React.FC<TextProps> = (props) => {
     <Text
       style={[
         styles.testStyle,
-        { color: Colors[props.theme  ? props.theme : 'dark'].icon_color },
+        { color: Colors[props.theme ? props.theme : 'dark'].icon_color },
         props.style,
       ]}
     >

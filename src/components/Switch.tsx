@@ -1,14 +1,18 @@
-import React, { useState } from "react";
-import { Switch, View, StyleSheet, Platform } from "react-native";
-import { newColors as Colors } from "../constants/colors";
-import {SmallText} from "./Texts/SmallText";
+import React, { useState } from 'react';
+import { Switch, View, StyleSheet, Platform } from 'react-native';
+import { newColors as Colors } from '../constants/colors';
+import { SmallText } from './Texts/SmallText';
 
 type SwitchType = {
   label: string;
   name: string;
   onValueChange: (name: string, value: boolean) => void;
 };
-export const MySwitch:React.FC<SwitchType> = ({ name, label, onValueChange }) => {
+export const MySwitch: React.FC<SwitchType> = ({
+  name,
+  label,
+  onValueChange,
+}) => {
   const [isEnabled, setIsEnabled] = useState(false);
   // const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const handleChange = (fieldname: string, fieldvalue: boolean) => {
@@ -25,7 +29,7 @@ export const MySwitch:React.FC<SwitchType> = ({ name, label, onValueChange }) =>
           isEnabled ? Colors.sw_thumb_enabled : Colors.sw_thumb_disabled
         }
         ios_backgroundColor="#3e3e3e"
-        onValueChange={val => handleChange(name, val)}
+        onValueChange={(val) => handleChange(name, val)}
         value={isEnabled}
       />
     </View>
@@ -34,8 +38,8 @@ export const MySwitch:React.FC<SwitchType> = ({ name, label, onValueChange }) =>
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     margin: 5,
   },
   label: {
