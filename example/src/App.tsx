@@ -23,9 +23,7 @@ export default function App() {
  
   //  store filed/value pair
   const handleChange = (field: string, val: string|boolean) => {
-    setFieldData({ ...fieldData, [field]: val });
-    console.log('##### field #########', fieldData);
-    
+    setFieldData({ ...fieldData, [field]: val });    
   };
 
   return (
@@ -51,7 +49,7 @@ export default function App() {
             theme={theme}
             props={{ style: { width: 200,height:50,padding:5} }}
           />
-<BigText theme={theme}>
+<BigText style={{width:300}} theme={theme}>
             switch: {fieldData.switch||fieldData.switch=== false ? fieldData.switch.toString() : ''}
           </BigText>
           <Switch 

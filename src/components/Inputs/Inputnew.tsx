@@ -50,7 +50,6 @@ export const MyTextInput: React.FC<textInputType> = ({
       // sethasFocus(false);
       // setPlaceh(' ');
     }
-    console.log('##### handle Blur');
     const errMessage = handleValidation(value, validation);
     setFieldError(errMessage);
     const newError: ErrorStateType = {
