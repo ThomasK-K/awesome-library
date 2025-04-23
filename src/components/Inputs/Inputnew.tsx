@@ -1,5 +1,5 @@
 import React, { type JSX, useState } from 'react';
-import { StyleSheet, View, TextInput, Pressable, Platform } from 'react-native';
+import { StyleSheet, View, TextInput, Pressable } from 'react-native';
 import { SmallText } from '../Texts/SmallText';
 import { handleValidation } from '../../utils/Validator';
 import { type textInputType } from '../../types';
@@ -13,8 +13,8 @@ export const MyTextInput: React.FC<textInputType> = ({
   onValueChange,
   validation,
   theme,
-
-  ...props
+  props
+ 
 }): JSX.Element => {
   // const [hidePassword, _] = useState(true);
   // const [placeh,setPlaceh] = useState<string | null>(null);
@@ -24,15 +24,10 @@ export const MyTextInput: React.FC<textInputType> = ({
   const errorRecoil = useRecoilState(errorState);
 
   // dummy
-  const {} = { ...props };
-
-  // useEffect(() => {}, [errors]);
+  const {style} = { ...props };
 
   const customOnFocus = () => {
     setFieldError('');
-
-    // sethasFocus(true);
-    // setOnPress(true);
   };
   //////////////////////////////////////////////////////
   const handleChange = (fieldname: string, fieldvalue: string) => {
@@ -68,7 +63,7 @@ export const MyTextInput: React.FC<textInputType> = ({
   return (
     <View style={[styles.container]}>
       <Pressable>
-        <View>
+        <View style={[style]}>
           <SmallText theme={theme}>{label}</SmallText>
           <TextInput
             // placeholder={placeh ? placeh : props.placeholder}
@@ -90,30 +85,11 @@ const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 4,
+    borderRadius: 10,
     overflow: 'hidden',
     backgroundColor: 'white',
   },
-  picker: {
-    width: '100%',
-    height: 50,
-    color: 'black',
-  },
-  webSelect: {
-    width: '100%',
-    padding: 12,
-    fontSize: 16,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
-    backgroundColor: 'white',
-    cursor: 'pointer',
-    ...(Platform.OS === 'web' ? { outline: 'none' } : {}),
-  },
-  disabled: {
-    opacity: 0.6,
-  },
   error: {
-    color: 'red',
+    color: 'red', padding:5
   },
 });

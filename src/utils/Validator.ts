@@ -13,7 +13,11 @@ const isPhone = (phone: string): boolean => {
   const regex = /^\d{10}$/; // Beispiel: 10-stellige Nummer
   return regex.test(phone);
 };
-
+const isDecimal = (phone: string): boolean => {
+  // eslint-disable-next-line no-useless-escape
+  const regex = /^\d{1,},\d{1,2}$/; // Beispiel: 
+  return regex.test(phone);
+};
 const isURL = (url: string): boolean => {
   const regex =
     // eslint-disable-next-line no-useless-escape
@@ -36,6 +40,7 @@ const myValidator = {
   isRequired,
   isNumeric,
   isPhone,
+  isDecimal,
   isStrongPassword,
   isURL,
 };
@@ -62,6 +67,10 @@ export const handleValidation = (
       case 'phone':
         if (!myValidator.isPhone(value))
           errMessage = 'entry is not a phone number';
+        break;
+      case 'decimal':
+        if (!myValidator.isDecimal(value))
+          errMessage = 'entry is not a decimal number';
         break;
       case 'url':
         if (!myValidator.isURL(value)) errMessage = 'entry is not a Url';

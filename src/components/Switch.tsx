@@ -14,14 +14,13 @@ export const MySwitch: React.FC<SwitchType> = ({
   onValueChange,
 }) => {
   const [isEnabled, setIsEnabled] = useState(false);
-  // const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
-  const handleChange = (fieldname: string, fieldvalue: boolean) => {
-    onValueChange(fieldname, fieldvalue);
+  const handleChange = (fieldname: string) => {
     setIsEnabled((previousState) => !previousState);
+    onValueChange(fieldname, !isEnabled);
   };
   return (
     <View style={[styles.container]}>
-      <SmallText style={[styles.label]}>{label}</SmallText>
+      <SmallText theme='light' style={[styles.label]}>{label}</SmallText>
       <Switch
         style={[styles.switch]}
         trackColor={{ false: Colors.sw_false, true: Colors.sw_true }}
@@ -29,7 +28,7 @@ export const MySwitch: React.FC<SwitchType> = ({
           isEnabled ? Colors.sw_thumb_enabled : Colors.sw_thumb_disabled
         }
         ios_backgroundColor="#3e3e3e"
-        onValueChange={(val) => handleChange(name, val)}
+        onValueChange={() => handleChange(name)}
         value={isEnabled}
       />
     </View>
