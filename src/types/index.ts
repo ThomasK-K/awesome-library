@@ -18,12 +18,13 @@ export type textInputType = {
   name: string;
   onValueChange: (name: string, value: string) => void;
   width?: number;
+  style?: {};
   validation?: {
     type?: 'email' | 'numeric' | 'password' | 'url' | 'phone' | 'ipAdress'|'decimal';
     required?: true;
   };
   theme?: 'light' | 'dark';
-  props?: {style?: {}};
+  props?: {};
 };
 export interface inputSelectProps {
   items: SelectItem[];

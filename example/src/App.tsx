@@ -1,31 +1,35 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet,TouchableOpacity,Text } from 'react-native';
 import { RecoilRoot } from 'recoil';
 import {
   type themeType,
   SmallText,
   BigText,
-  Input,Switch
+  Input,
+  Switch,
+  Modal,
 } from 'tkk-rn-component-package';
 import { useState } from 'react';
 
-
 type metaDataType = {
-  [fieldName: string]: string | number| boolean | undefined;
+  [fieldName: string]: string | number | boolean | undefined;
 };
 
-
-
 export default function App() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const theme: themeType = 'light' as themeType;
 
   const [fieldData, setFieldData] = useState<metaDataType>({});
 
- 
   //  store filed/value pair
-  const handleChange = (field: string, val: string|boolean) => {
-    setFieldData({ ...fieldData, [field]: val });    
+  const handleChange = (field: string, val: string | boolean) => {
+    setFieldData({ ...fieldData, [field]: val });
   };
 
+  const handleClose = (): void => {
+    setIsModalVisible(false);
+    
+  }
+  const uploadFile= () => {setIsModalVisible(true);};
   return (
     <RecoilRoot>
       <View
@@ -34,33 +38,44 @@ export default function App() {
           theme === 'dark' ? styles.dark : styles.light,
         ]}
       >
-        <View style={styles.content}>
-          <SmallText theme={theme}>Dies ist der SmallText</SmallText>
-          <BigText theme={theme}>
-            Dies ist ein Bigtext mit theme {theme}
-          </BigText>
-          <Input
-            label="Betrag"
-            name="betrag"
-            onValueChange={handleChange}
-            isDecimal={true}
-            isPassword={false}
-            validation={{ type: 'decimal', required: true }}
-            theme={theme}
-            props={{ style: { width: 200,height:50,padding:5} }}
-          />
-<BigText style={{width:300}} theme={theme}>
-            switch: {fieldData.switch||fieldData.switch=== false ? fieldData.switch.toString() : ''}
-          </BigText>
-          <Switch 
-            label="Switch"
-            name="switch"
-            onValueChange={handleChange}
-          />
-          
-          
+    
+          <Modal
+            buttonLabel="Speichern"
+            visible={isModalVisible}
+            onClose={handleClose}
+            theme={'dark'}
+          >
+            <SmallText theme={theme}>Dies ist der SmallText</SmallText>
+            <BigText theme={theme}>
+              Dies ist ein Bigtext mit theme {theme}
+            </BigText>
+            <Input
+              label="Betrag"
+              name="betrag"
+              onValueChange={handleChange}
+              isDecimal={true}
+              isPassword={false}
+              validation={{ type: 'decimal', required: true }}
+              theme={theme}
+              style={{ width: 400, height: 50, padding: 5 }}
+            />
+            <BigText style={{ width: 300 }} theme={theme}>
+              switch:{' '}
+              {fieldData.switch || fieldData.switch === false
+                ? fieldData.switch.toString()
+                : ''}
+            </BigText>
+            <Switch label="Switch" style={{width:400}} name="switch" onValueChange={handleChange} />
+          </Modal>
+          <TouchableOpacity
+                style={styles.docButtons}
+                onPress={() => uploadFile()}
+             
+              >
+                <Text style={styles.docButtonText}>Erfasse Doc </Text>
+              </TouchableOpacity>
         </View>
-      </View>
+    
     </RecoilRoot>
   );
 }
@@ -91,4 +106,12 @@ const styles = StyleSheet.create({
   dark: {
     backgroundColor: 'rgb(100,100,100)',
   },
+  docButtons: {
+    backgroundColor: "red",
+    padding: 10,
+    borderRadius: 5,
+  },
+  docButtonText: {
+    color: "white",
+  }
 });

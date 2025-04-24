@@ -13,7 +13,8 @@ export const MyTextInput: React.FC<textInputType> = ({
   onValueChange,
   validation,
   theme,
-  props
+  style,
+
  
 }): JSX.Element => {
   // const [hidePassword, _] = useState(true);
@@ -23,8 +24,6 @@ export const MyTextInput: React.FC<textInputType> = ({
   const setError = useSetRecoilState(errorState);
   const errorRecoil = useRecoilState(errorState);
 
-  // dummy
-  const {style} = { ...props };
 
   const customOnFocus = () => {
     setFieldError('');
@@ -63,9 +62,23 @@ export const MyTextInput: React.FC<textInputType> = ({
     <View style={[styles.container]}>
       <Pressable>
         <View style={[style]}>
-          <SmallText theme={theme}>{label}</SmallText>
+          <SmallText theme={theme} style={{
+          color: 'black',
+      
+        }}>{label}</SmallText>
           <TextInput
             // placeholder={placeh ? placeh : props.placeholder}
+            style={{
+              borderWidth: 1,
+              borderColor: errors ? 'red' : '#ccc',
+              borderRadius: 10,
+              padding: 10,
+              backgroundColor: 'white',
+              color: 'black',
+              width: '100%',
+              height: 20,
+              fontSize: 12
+            }}
             value={value}
             onChangeText={(val) => handleChange(name, val)}
             // secureTextEntry={isPassword && hidePassword}
