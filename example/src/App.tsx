@@ -82,7 +82,9 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: .7,
+    justifyContent: 'center',
+    // alignItems: 'center',
   },
 
   content: {
