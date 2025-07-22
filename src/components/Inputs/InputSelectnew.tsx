@@ -71,8 +71,9 @@ export const CrossPlatformPicker: React.FC<inputSelectProps> = ({
   validation = {
     required: true,
   },
+  val
 }) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(val || '');
   const [errors, setFieldError] = useState('');
   const setError = useSetRecoilState(errorState);
   const errorRecoil = useRecoilState(errorState);
