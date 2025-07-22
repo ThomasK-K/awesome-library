@@ -20,9 +20,17 @@ export type textInputType = {
   width?: number;
   style?: {};
   validation?: {
-    type?: 'email' | 'numeric' | 'password' | 'url' | 'phone' | 'ipAdress'|'decimal';
+    type?:
+      | 'email'
+      | 'numeric'
+      | 'password'
+      | 'url'
+      | 'phone'
+      | 'ipAdress'
+      | 'decimal';
     required?: true;
   };
+  val?: string | number;
   theme?: 'light' | 'dark';
   props?: {};
 };
@@ -42,6 +50,7 @@ export interface inputSelectProps {
     type?: 'email' | 'numeric' | 'password' | 'url' | 'phone' | 'ipAdress';
     required?: true;
   };
+  val?: string | number;
   theme?: 'light' | 'dark';
   props?: {};
 }

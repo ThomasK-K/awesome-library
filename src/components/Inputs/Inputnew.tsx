@@ -14,12 +14,13 @@ export const MyTextInput: React.FC<textInputType> = ({
   validation,
   theme,
   style,
+  val
 
  
 }): JSX.Element => {
   // const [hidePassword, _] = useState(true);
   // const [placeh,setPlaceh] = useState<string | null>(null);
-  const [value, setvalue] = useState('');
+  const [value, setvalue] = useState<string | number>(val || '');
   const [errors, setFieldError] = useState('');
   const setError = useSetRecoilState(errorState);
   const errorRecoil = useRecoilState(errorState);
@@ -79,7 +80,8 @@ export const MyTextInput: React.FC<textInputType> = ({
               height: 20,
               fontSize: 12
             }}
-            value={value}
+            
+            value={value.toString()}
             onChangeText={(val) => handleChange(name, val)}
             // secureTextEntry={isPassword && hidePassword}
             keyboardType={isDecimal ? 'numeric' : 'default'}

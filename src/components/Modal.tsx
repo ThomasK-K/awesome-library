@@ -50,19 +50,7 @@ export const ModalComponent: React.FC<
         style={[
           { backgroundColor: Colors[theme ? theme : 'dark'].background95 },
           { boxShadow: Colors[theme ? theme : 'dark'].borderShadow },
-          { width: '30%' },
-          { height: '30%' },
-          { borderRadius: 10 },
-          { justifyContent: 'center' },
-          { alignContent: 'center' },
-          { padding: 10 },
-          { margin: 10 },
-          { shadowColor: '#000' },
-          { shadowOffset: { width: 5, height: 5 } },
-          { shadowOpacity: 0.3 },
-          { shadowRadius: 10 },
-          // Schatten für Android
-          { elevation: 10 },
+          styles.modalbox
         ]}
       >
         <View>
@@ -86,16 +74,18 @@ export const ModalComponent: React.FC<
 // Stile
 const styles = StyleSheet.create({
   modalContent: {
-    // flex: 1,
-    width: '10%',
+  
+
   },
-  modalbox1: {
+  modalbox: {
     justifyContent: 'center',
     alignItems: 'center',
+    width: 500,
+    height: 500,
     borderRadius: 10,
+    alignContent: 'center',
     padding: 10,
     margin: 10,
-    // Schatten für iOS
     shadowColor: '#000',
     shadowOffset: { width: 5, height: 5 },
     shadowOpacity: 0.3,

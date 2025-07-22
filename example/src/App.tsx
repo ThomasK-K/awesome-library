@@ -1,4 +1,4 @@
-import { View, StyleSheet,TouchableOpacity,Text } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { RecoilRoot } from 'recoil';
 import {
   type themeType,
@@ -27,9 +27,10 @@ export default function App() {
 
   const handleClose = (): void => {
     setIsModalVisible(false);
-    
-  }
-  const uploadFile= () => {setIsModalVisible(true);};
+  };
+  const uploadFile = () => {
+    setIsModalVisible(true);
+  };
   return (
     <RecoilRoot>
       <View
@@ -38,53 +39,53 @@ export default function App() {
           theme === 'dark' ? styles.dark : styles.light,
         ]}
       >
-    
-          <Modal
-            buttonLabel="Speichern"
-            visible={isModalVisible}
-            onClose={handleClose}
-            theme={'dark'}
-          >
-            <SmallText theme={theme}>Dies ist der SmallText</SmallText>
-            <BigText theme={theme}>
-              Dies ist ein Bigtext mit theme {theme}
-            </BigText>
-            <Input
-              label="Betrag"
-              name="betrag"
-              onValueChange={handleChange}
-              isDecimal={true}
-              isPassword={false}
-              validation={{ type: 'decimal', required: true }}
-              theme={theme}
-              style={{ width: 400, height: 50, padding: 5 }}
-            />
-            <BigText style={{ width: 300 }} theme={theme}>
-              switch:{' '}
-              {fieldData.switch || fieldData.switch === false
-                ? fieldData.switch.toString()
-                : ''}
-            </BigText>
-            <Switch label="Switch" style={{width:400}} name="switch" onValueChange={handleChange} />
-          </Modal>
-          <TouchableOpacity
-                style={styles.docButtons}
-                onPress={() => uploadFile()}
-             
-              >
-                <Text style={styles.docButtonText}>Erfasse Doc </Text>
-              </TouchableOpacity>
-        </View>
-    
+        <Modal
+          buttonLabel="Speichern"
+          visible={isModalVisible}
+          onClose={handleClose}
+          theme={'dark'}
+        >
+          <SmallText theme={theme}>Dies ist der SmallText</SmallText>
+          <BigText theme={theme}>
+            Dies ist ein Bigtext mit theme {theme}
+          </BigText>
+          <Input
+            label="Betrag"
+            name="betrag"
+            val={'http://192.168.10.1113:3000/docs/upload'}
+            onValueChange={handleChange}
+            theme={theme}
+            style={{ width: 400, height: 50, padding: 5 }}
+          />
+          <BigText style={{ width: 300 }} theme={theme}>
+            switch:{' '}
+            {fieldData.switch || fieldData.switch === false
+              ? fieldData.switch.toString()
+              : ''}
+          </BigText>
+          <Switch
+            label="Switch"
+            style={{ width: 400 }}
+            name="switch"
+            onValueChange={handleChange}
+          />
+        </Modal>
+        <TouchableOpacity
+          style={styles.docButtons}
+          onPress={() => uploadFile()}
+        >
+          <Text style={styles.docButtonText}>Erfasse Doc </Text>
+        </TouchableOpacity>
+      </View>
     </RecoilRoot>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: .7,
+    flex: 1,
     justifyContent: 'center',
-    // alignItems: 'center',
+    alignItems: 'center',
   },
 
   content: {
@@ -109,11 +110,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(100,100,100)',
   },
   docButtons: {
-    backgroundColor: "red",
+    backgroundColor: 'red',
     padding: 10,
     borderRadius: 5,
   },
   docButtonText: {
-    color: "white",
-  }
+    color: 'white',
+  },
 });
