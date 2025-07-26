@@ -1,6 +1,14 @@
 {
   "extends": "../tsconfig",
   "compilerOptions": {
-    // Avoid expo-cli auto-generating a tsconfig
+    "baseUrl": ".",
+    "paths": {
+      "tkk-rn-component-package": ["../src"]
+    },
+    "jsx": "react-native",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true
   }
 }

@@ -11,14 +11,13 @@ export interface TextProps {
 }
 export type textInputType = {
   //   icon?: IconProps<string>
+  name: string;
   iconName?: keyof typeof FontAwesome.glyphMap;
   label: string;
+  val?: string | number;
   isPassword?: boolean;
   isDecimal?: boolean;
-  name: string;
   onValueChange: (name: string, value: string) => void;
-  width?: number;
-  style?: {};
   validation?: {
     type?:
       | 'email'
@@ -30,30 +29,68 @@ export type textInputType = {
       | 'decimal';
     required?: true;
   };
-  val?: string | number;
+  width?: number;
+  containerStyle?: object;
+  labelStyle?: object;
+  inputStyle?: object;
+  errorTextStyle?: object;
   theme?: 'light' | 'dark';
+  keyboardType?:
+    | 'default'
+    | 'number-pad'
+    | 'decimal-pad'
+    | 'numeric'
+    | 'email-address'
+    | 'phone-pad'
+    | 'url';
+  showErrorIcon?: boolean;
   props?: {};
+};
+// Enhanced types
+export type ThemeColors = {
+  backgroundColor?: string;
+  textColor?: string;
+  borderColor?: string;
+  placeholderColor?: string;
+  selectedBackgroundColor?: string;
+  disabledBackgroundColor?: string;
 };
 export interface inputSelectProps {
   items: SelectItem[];
   enabled?: boolean;
   iconName?: keyof typeof MaterialCommunityIcons.glyphMap;
-  label: string;
+  label?: string;
   name: string;
-  isDecimal?: boolean;
   accessibilityLabel?: string;
   onValueChange: (name: string, value: string) => void;
   width?: number;
   placeholder?: string;
-  style?: {};
-  validation?: {
-    type?: 'email' | 'numeric' | 'password' | 'url' | 'phone' | 'ipAdress';
-    required?: true;
-  };
+  themeColors?: ThemeColors;
+  containerStyle?: object;
+  groupedItems?: Array<{ label: string; items: SelectItem[] }>;
+  renderItem?: (item: SelectItem) => React.ReactNode;
+  labelStyle?: object;
+  inputStyle?: object;
+  pickerStyle?: object;
+  errorTextStyle?: object;
+  theme?: 'light' | 'dark' | 'custom';
   val?: string | number;
-  theme?: 'light' | 'dark';
-  props?: {};
+  validation?: {
+    type?: 'email' | 'numeric' | 'required';
+    required?: boolean;
+    minLength?: number;
+    maxLength?: number;
+    pattern?: RegExp;
+    customValidator?: (value: string | number) => string | null;
+  };
+  labelPosition?: 'top' | 'left' | 'inside' | 'floating';
+  showErrorIcon?: boolean;
+  dropdownStyle?: object;
+  webSelectProps?: object;
+  nativeSelectProps?: object;
+  props?: object;
 }
 export type SelectItem = {
   value: string | number;
+  label:string
 };

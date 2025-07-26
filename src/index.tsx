@@ -21,5 +21,7 @@ export { ModalComponent as Modal } from './components/Modal';
 // Switch
 export { MySwitch as Switch } from './components/Switch';
 // Inputs
-export { CrossPlatformPicker } from './components/Inputs/InputSelectnew';
-export { MyTextInput as Input } from './components/Inputs/Inputnew';
+export { CrossPlatformPicker as InputSelect } from './components/Inputs/InputSelect';
+export { MyTextInput as Input } from './components/Inputs/Input';
+// Types for configuration
+export type { SelectItem, inputSelectProps, ThemeColors } from './types';

@@ -50,10 +50,10 @@ export const ModalComponent: React.FC<
         style={[
           { backgroundColor: Colors[theme ? theme : 'dark'].background95 },
           { boxShadow: Colors[theme ? theme : 'dark'].borderShadow },
-          styles.modalbox
+          styles.modalbox,
         ]}
       >
-        <View>
+        <View style={styles.modalContent}>
           {children}
           {/* Button zum Schließen des Modals */}
           <SmallText style={{ color: 'red' }}>{` `}</SmallText>
@@ -74,13 +74,12 @@ export const ModalComponent: React.FC<
 // Stile
 const styles = StyleSheet.create({
   modalContent: {
-  
-
+    width: '90%',
   },
   modalbox: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 500,
+    width: '90%',
     height: 500,
     borderRadius: 10,
     alignContent: 'center',
